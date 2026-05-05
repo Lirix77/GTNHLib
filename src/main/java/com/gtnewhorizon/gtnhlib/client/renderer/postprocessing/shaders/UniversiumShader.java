@@ -2,7 +2,6 @@ package com.gtnewhorizon.gtnhlib.client.renderer.postprocessing.shaders;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -13,7 +12,6 @@ import org.lwjgl.opengl.GL20;
 import com.gtnewhorizon.gtnhlib.GTNHLib;
 import com.gtnewhorizon.gtnhlib.client.renderer.shader.ShaderProgram;
 import com.gtnewhorizon.gtnhlib.client.renderer.textures.TextureAtlas;
-import com.gtnewhorizon.gtnhlib.mixins.early.EntityRendererAccessor;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -203,29 +201,29 @@ public final class UniversiumShader extends ShaderProgram {
         return this;
     }
 
-    public UniversiumShader setLightFromLocation(World world, int x, int y, int z) {
-        if (world == null) {
-            return setLightLevel(1.0f);
-        }
-
-        int coord = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
-
-        int[] map = ((EntityRendererAccessor) Minecraft.getMinecraft().entityRenderer).getLightmapColors();
-
-        if (map == null) {
-            return setLightLevel(1.0f);
-        }
-
-        int mx = (coord % 65536) / 16;
-        int my = (coord / 65536) / 16;
-
-        int lightColour = map[Math.max(0, Math.min(map.length - 1, my * 16 + mx))];
-
-        return setLightLevel(
-                ((lightColour >> 16) & 0xFF) / 255.0f,
-                ((lightColour >> 8) & 0xFF) / 255.0f,
-                ((lightColour) & 0xFF) / 255.0f);
-    }
+    // public UniversiumShader setLightFromLocation(World world, int x, int y, int z) {
+    // if (world == null) {
+    // return setLightLevel(1.0f);
+    // }
+    //
+    // int coord = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
+    //
+    // int[] map = ((EntityRendererAccessor) Minecraft.getMinecraft().entityRenderer).getLightmapColors();
+    //
+    // if (map == null) {
+    // return setLightLevel(1.0f);
+    // }
+    //
+    // int mx = (coord % 65536) / 16;
+    // int my = (coord / 65536) / 16;
+    //
+    // int lightColour = map[Math.max(0, Math.min(map.length - 1, my * 16 + mx))];
+    //
+    // return setLightLevel(
+    // ((lightColour >> 16) & 0xFF) / 255.0f,
+    // ((lightColour >> 8) & 0xFF) / 255.0f,
+    // ((lightColour) & 0xFF) / 255.0f);
+    // }
 
     public UniversiumShader setLightLevel(float level) {
         return setLightLevel(level, level, level);

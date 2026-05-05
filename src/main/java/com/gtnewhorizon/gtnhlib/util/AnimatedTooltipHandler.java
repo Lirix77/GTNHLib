@@ -12,14 +12,11 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.gtnewhorizon.gtnhlib.eventbus.EventBusSubscriber;
 import com.gtnewhorizon.gtnhlib.util.map.ItemStackMap;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 
-@EventBusSubscriber(side = Side.CLIENT)
 public class AnimatedTooltipHandler {
 
     private static final Map<ItemStack, Supplier<String>> tooltipMap = new ItemStackMap<>(false);

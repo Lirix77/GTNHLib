@@ -1,8 +1,8 @@
 package com.gtnewhorizon.gtnhlib.client.model.loading;
 
+import static com.gtnewhorizon.gtnhlib.GTNHLib.MODEL_LOGGER;
 import static com.gtnewhorizon.gtnhlib.GTNHLibConfig.modelCacheSize;
 import static com.gtnewhorizon.gtnhlib.client.model.unbaked.MissingModel.MISSING_MODEL;
-import static com.gtnewhorizon.gtnhlib.core.GTNHLibCore.MODEL_LOGGER;
 
 import java.util.List;
 

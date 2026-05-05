@@ -21,6 +21,7 @@ public class GTNHLib {
     public static final String GROUPNAME = "com.gtnewhorizon.gtnhlib";
     public static final String RESOURCE_DOMAIN = "gtnhlib";
     public static final Logger LOG = LogManager.getLogger(GTNHLib.MODID);
+    public static final Logger MODEL_LOGGER = LogManager.getLogger("GTNHLib|Models");
 
     @SidedProxy(clientSide = GTNHLib.GROUPNAME + ".ClientProxy", serverSide = GTNHLib.GROUPNAME + ".CommonProxy")
     public static CommonProxy proxy;

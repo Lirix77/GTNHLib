@@ -1,9 +1,6 @@
 package com.gtnewhorizon.gtnhlib;
 
-import static com.gtnewhorizon.gtnhlib.core.GTNHLibCore.isObf;
-
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.FakePlayer;
@@ -19,10 +16,6 @@ import com.gtnewhorizon.gtnhlib.chat.customcomponents.ChatComponentItemName;
 import com.gtnewhorizon.gtnhlib.chat.customcomponents.ChatComponentNumber;
 import com.gtnewhorizon.gtnhlib.config.ConfigException;
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
-import com.gtnewhorizon.gtnhlib.eventbus.AutoEventBus;
-import com.gtnewhorizon.gtnhlib.eventbus.EventBusSubscriber;
-import com.gtnewhorizon.gtnhlib.eventbus.Phase;
-import com.gtnewhorizon.gtnhlib.keybind.SyncedKeybind;
 import com.gtnewhorizon.gtnhlib.network.NetworkHandler;
 import com.gtnewhorizon.gtnhlib.network.PacketMessageAboveHotbar;
 import com.gtnewhorizon.gtnhlib.network.PacketViewDistance;
@@ -46,15 +39,14 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@EventBusSubscriber
 public class CommonProxy {
 
     public void construct(FMLConstructionEvent event) {
-        AutoEventBus.executePhase(Phase.CONSTRUCT);
+        // AutoEventBus.executePhase(Phase.CONSTRUCT);
     }
 
     public void preInit(FMLPreInitializationEvent event) {
-        AutoEventBus.executePhase(Phase.PRE);
+        // AutoEventBus.executePhase(Phase.PRE);
         GTNHLib.info("GTNHLib version " + Tags.VERSION + " loaded.");
 
         if (GTNHLibConfig.enableTestBlocks) {
@@ -79,8 +71,6 @@ public class CommonProxy {
         // as well, just in-case calls are made to number formatting.
         try {
             ConfigurationManager.registerConfig(NumberFormatConfig.class);
-            // only register in dev
-            if (!isObf()) ConfigurationManager.registerConfig(ExampleConfig.class);
         } catch (ConfigException e) {
             throw new RuntimeException(e);
         }
@@ -88,14 +78,10 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
-        AutoEventBus.executePhase(Phase.INIT);
+        // AutoEventBus.executePhase(Phase.INIT);
         NetworkHandler.init();
         ConfigurationManager.onInit();
 
-        if ((boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
-            SyncedKeybind.createConfigurable("gtnhlib.test_keybind", "debug", 0).registerGlobalListener(
-                    (p, l, keyDown) -> { GTNHLib.LOG.info("GTNHLib test keybind down: {}", keyDown); });
-        }
     }
 
     public void postInit(FMLPostInitializationEvent event) {}

@@ -2,7 +2,6 @@ package com.gtnewhorizon.gtnhlib.network;
 
 import com.gtnewhorizon.gtnhlib.GTNHLib;
 import com.gtnewhorizon.gtnhlib.config.PacketSyncConfig;
-import com.gtnewhorizon.gtnhlib.keybind.PacketKeyDown;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -19,7 +18,6 @@ public class NetworkHandler {
                 0,
                 Side.CLIENT);
         instance.registerMessage(PacketSyncConfig.Handler.class, PacketSyncConfig.class, 1, Side.CLIENT);
-        instance.registerMessage(PacketKeyDown.HandlerKeyDown.class, PacketKeyDown.class, 2, Side.SERVER);
         instance.registerMessage(PacketViewDistance.Handler.class, PacketViewDistance.class, 3, Side.CLIENT);
     }
 }

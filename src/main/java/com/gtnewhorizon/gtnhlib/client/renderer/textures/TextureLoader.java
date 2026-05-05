@@ -16,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.google.common.annotations.Beta;
-import com.gtnewhorizon.gtnhlib.core.GTNHLibCore;
 
 /**
  * A utility class that helps with loading textures. <br>
@@ -122,7 +121,7 @@ public class TextureLoader {
     static {
         IntBuffer buffer;
         try {
-            Field f = TextureUtil.class.getDeclaredField(GTNHLibCore.isObf() ? "field_111000_c" : "dataBuffer");
+            Field f = TextureUtil.class.getDeclaredField("field_111000_c");
             f.setAccessible(true);
             buffer = (IntBuffer) f.get(null);
         } catch (Exception e) {

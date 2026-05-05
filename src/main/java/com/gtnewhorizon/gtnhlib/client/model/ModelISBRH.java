@@ -11,7 +11,6 @@ import static net.minecraftforge.client.IItemRenderer.ItemRenderType.INVENTORY;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
@@ -21,7 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
@@ -35,7 +33,6 @@ import com.gtnewhorizon.gtnhlib.client.model.loading.ModelRegistry;
 import com.gtnewhorizon.gtnhlib.client.renderer.TessellatorManager;
 import com.gtnewhorizon.gtnhlib.client.renderer.cel.model.quad.ModelQuadView;
 import com.gtnewhorizon.gtnhlib.client.renderer.cel.model.quad.properties.ModelQuadFacing;
-import com.gtnewhorizon.gtnhlib.core.fml.transformers.BlockIconTransformer;
 import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -409,30 +406,5 @@ public class ModelISBRH implements ISimpleBlockRenderingHandler, IItemRenderer {
             }
             GL11.glTranslatef(-px, -py, -pz);
         }
-    }
-
-    /// Mirrors the default {@link Block#getIcon(IBlockAccess, int, int, int, int)}, with the exception that the block
-    /// is also re-fetched. This is because the blockstate construction does world access anyway, overriding just the
-    /// block is annoying and seems less correct.
-    ///
-    /// Used in {@link BlockIconTransformer}
-    public @NotNull IIcon getParticleIcon(@Nullable IBlockAccess world, int x, int y, int z) {
-        worldContext.world = world;
-        worldContext.x = x;
-        worldContext.y = y;
-        worldContext.z = z;
-        worldContext.random = RAND;
-        worldContext.blockState = BlockPropertyRegistry.getBlockState(world, x, y, z);
-        final var model = ModelRegistry.getBakedModel(worldContext);
-        final var ret = model.getParticle(worldContext);
-
-        worldContext.reset();
-        return ret;
-    }
-
-    /// Used in {@link BlockIconTransformer}
-    @SuppressWarnings("unused")
-    public @NotNull IIcon getMissingIcon() {
-        return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("missingno");
     }
 }
