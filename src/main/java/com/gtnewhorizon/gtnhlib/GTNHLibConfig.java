@@ -6,7 +6,7 @@ import com.gtnewhorizon.gtnhlib.config.Config;
 public class GTNHLibConfig {
 
     @Config.Comment("Set to true to no longer check if the NEI version is new enough to support RenderTooltipEvents")
-    @Config.DefaultBoolean(false)
+    @Config.DefaultBoolean(true)
     public static boolean ignoreNEIVersion;
 
     @Config.Comment("Font rendering replacements")
